@@ -5,7 +5,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - web_a
       - web_b
@@ -44,7 +44,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
     ports:
       - "9090:9090"
@@ -74,8 +74,8 @@ services:
   # --- Custom Scaler (The Brain) ---
   scaler:
     build:
-      context: .
-      dockerfile: Dockerfile.scaler
+      context: ./scaler
+      dockerfile: Dockerfile
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
@@ -89,7 +89,7 @@ services:
   web_a:
     image: nginx:alpine
     volumes:
-      - ./sites/a:/usr/share/nginx/html:ro
+      - ./web/a:/usr/share/nginx/html:ro
     restart: always
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
@@ -105,7 +105,7 @@ services:
   web_b:
     image: nginx:alpine
     volumes:
-      - ./sites/b:/usr/share/nginx/html:ro
+      - ./web/b:/usr/share/nginx/html:ro
     restart: always
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
@@ -121,7 +121,7 @@ services:
   web_c:
     image: nginx:alpine
     volumes:
-      - ./sites/c:/usr/share/nginx/html:ro
+      - ./web/c:/usr/share/nginx/html:ro
     restart: always
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]

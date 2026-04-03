@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectural Systems | Senior DevOps Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --onyx: #0a0a0b;
+            --gold: #d4af37;
+            --gold-light: #f1d592;
+            --gray-dark: #1a1a1c;
+            --text-main: #e4e4e7;
+            --text-muted: #a1a1aa;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--onyx);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        nav {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        .hero {
+            padding: 100px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            line-height: 0.9;
+            color: #fff;
+            letter-spacing: -2px;
+        }
+
+        .hero-text h1 span {
+            color: var(--gold);
+            display: block;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            max-width: 500px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 4px;
+            filter: grayscale(0.5) brightness(0.8);
+            border: 1px solid var(--gold);
+            box-shadow: 20px 20px 0 var(--gray-dark);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .skill-tag {
+            padding: 8px 20px;
+            background: var(--gray-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--gold);
+            background: var(--onyx);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .experience {
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-header {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+            display: block;
+        }
+
+        .project-card {
+            background: var(--gray-dark);
+            padding: 40px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--gold);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            background: #202022;
+            transform: translateX(10px);
+        }
+
+        .project-card h3 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: #fff;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 700px;
+        }
+
+        .contact-cta {
+            padding: 100px 0;
+            text-align: center;
+            background: var(--gold);
+            color: var(--onyx);
+            margin: 40px 0;
+            border-radius: 4px;
+        }
+
+        .contact-cta h2 { font-size: 3rem; margin-bottom: 20px; }
+        .contact-cta .btn {
+            background: var(--onyx);
+            color: var(--gold);
+            padding: 16px 40px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 4px;
+            display: inline-block;
+            transition: transform 0.38s;
+        }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
+            .hero-text h1 { font-size: 4rem; }
+            .hero-image img { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <div class="logo">A.S.A</div>
+            <div style="display: flex; gap: 20px; font-size: 0.9rem; font-weight: 600;">
+                <span style="color: var(--gold);">// WORK</span>
+                <span>// ARCHITECTURE</span>
+                <span>// STRATEGY</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-text">
+                <span style="color: var(--gold); font-size: 1rem; margin-bottom: 10px; display: block;">ENGINEERING SCALE //</span>
+                <h1>System <span>Architect</span></h1>
+                <p>Developing resilient, high-availability infrastructures for data-intensive projects. Specializing in autonomous scaling engines and distributed systems.</p>
+                <div class="skills">
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">Autoscaling</span>
+                    <span class="skill-tag">Observability</span>
+                    <span class="skill-tag">DevSecOps</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="hero.png" alt="Architectural Blueprint Styling">
+            </div>
+        </section>
+
+        <section class="experience">
+            <span class="section-header">Proven Impact</span>
+            <div class="project-card">
+                <h3>Global Traffic Management</h3>
+                <p>Architected a multi-region load balancing strategy that reduced latency by 150ms and eliminated single points of failure across 15 clusters.</p>
+            </div>
+            <div class="project-card">
+                <h3>Cost Optimization Engine</h3>
+                <p>Designed a machine-learning based autoscaler that reduced cloud spend by 45% through predictive workload analysis and spot instance fleet management.</p>
+            </div>
+        </section>
+
+        <section class="contact-cta">
+            <h2>Building for Reliability?</h2>
+            <p>Let's collaborate on your next infrastructure infrastructure challenge.</p>
+            <br>
+            <a href="#" class="btn">Initiate Connection</a>
+        </section>
+    </main>
+</body>
+</html>

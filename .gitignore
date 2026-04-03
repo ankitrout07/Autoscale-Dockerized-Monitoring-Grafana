@@ -1,0 +1,18 @@
+# Docker data directories
+prometheus_data/
+grafana_data/
+portainer_data/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
