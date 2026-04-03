@@ -11,6 +11,16 @@ services:
       - web_b
       - web_c
     restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
 
   # --- Monitoring Stack ---
   portainer:
@@ -40,6 +50,17 @@ services:
       - "9090:9090"
     restart: always
 
+  # --- Host Metrics Collector ---
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node-exporter
+    command:
+      - '--path.rootfs=/host'
+    pid: host
+    restart: always
+    volumes:
+      - '/:/host:ro,rslave'
+
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -50,24 +71,68 @@ services:
       - grafana_data:/var/lib/grafana
     restart: always
 
+  # --- Custom Scaler (The Brain) ---
+  scaler:
+    build:
+      context: .
+      dockerfile: Dockerfile.scaler
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - .env
+    depends_on:
+      - prometheus
+      - lb
+    restart: always
+
   # --- Scalable Web Tier ---
   web_a:
     image: nginx:alpine
     volumes:
       - ./sites/a:/usr/share/nginx/html:ro
     restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 64M
 
   web_b:
     image: nginx:alpine
     volumes:
       - ./sites/b:/usr/share/nginx/html:ro
     restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 64M
 
   web_c:
     image: nginx:alpine
     volumes:
       - ./sites/c:/usr/share/nginx/html:ro
     restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 64M
 
 volumes:
   portainer_data:
